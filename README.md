@@ -1,12 +1,6 @@
-# Swin Transformer for Semantic Segmentaion
+# Swin Transformer for Semantic Segmentaion in Offroad datasets
 
-This repo contains the supported code and configuration files to reproduce semantic segmentaion results of [Swin Transformer](https://arxiv.org/pdf/2103.14030.pdf). It is based on [mmsegmentaion](https://github.com/open-mmlab/mmsegmentation/tree/v0.11.0).
-
-## Updates
-
-***05/11/2021*** Models for [MoBY](https://github.com/SwinTransformer/Transformer-SSL) are released
-
-***04/12/2021*** Initial commits
+This repo contains the supported code and configuration files to reproduce semantic segmentaion results of [Swin Transformer](https://arxiv.org/pdf/2103.14030.pdf). on the custom dataset of offroad enviornment- RELLIS3D dataset. It is based on [mmsegmentaion](https://github.com/open-mmlab/mmsegmentation/tree/v0.11.0).
 
 ## Results and Models
 
@@ -20,27 +14,16 @@ This repo contains the supported code and configuration files to reproduce seman
 
 **Notes**: 
 
-- **Pre-trained models can be downloaded from [Swin Transformer for ImageNet Classification](https://github.com/microsoft/Swin-Transformer)**.
+- **Download the Pre-trained models from [Swin Transformer for ImageNet Classification](https://github.com/microsoft/Swin-Transformer). This will be used to fine-tune RELLIS3D dataset.**
+- Use small (S) or Tiney (T) model, which will be easy to compute.
 - Access code for `baidu` is `swin`.
-
-## Results of MoBY with Swin Transformer
-
-### ADE20K
-
-| Backbone | Method | Crop Size | Lr Schd | mIoU | mIoU (ms+flip) | #params | FLOPs | config | log | model |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Swin-T | UPerNet | 512x512 | 160K | 44.06 | 45.58 | 60M | 945G | [config](configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_ade20k.py) | [github](https://github.com/SwinTransformer/storage/releases/download/v1.0.3/moby_upernet_swin_tiny_patch4_window7_512x512.log.json)/[baidu](https://pan.baidu.com/s/1i0EMiapoQ-otkDmx-_cJHg) | [github](https://github.com/SwinTransformer/storage/releases/download/v1.0.3/moby_upernet_swin_tiny_patch4_window7_512x512.pth)/[baidu](https://pan.baidu.com/s/1BYgtgkHQV89bGC7LQLS7Jw) |
-
-**Notes**:
-
-- The learning rate needs to be tuned for best practice.
-- MoBY pre-trained models can be downloaded from [MoBY with Swin Transformer](https://github.com/SwinTransformer/Transformer-SSL).
+- The learning rate needs to be tuned for best practice to se what works best for RELLIS3D.
 
 ## Usage
 
 ### Installation
 
-Please refer to [get_started.md](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/get_started.md#installation) for installation and dataset preparation.
+Please refer to [get_started.md](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/get_started.md#installation) for installation and dataset preparation. Follow steps a, b, c, and d or just this https://github.com/open-mmlab/mmsegmentation/blob/master/docs/get_started.md#linux. This is to set up mmsegmentation with conda enviornment.
 
 ### Inference
 ```
@@ -66,7 +49,8 @@ tools/dist_train.sh <CONFIG_FILE> <GPU_NUM> --options model.pretrained=<PRETRAIN
 ```
 For example, to train an UPerNet model with a `Swin-T` backbone and 8 gpus, run:
 ```
-tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_ade20k.py 8 --options model.pretrained=<PRETRAIN_MODEL> 
+python tools/train.py configs/swin/upernet_swin_base_patch4_window7_512x512_160k_messidor.py --options model.pretrained=weights/<your path of the pretrain you downloaded from the above steps>.pth
+
 ```
 
 **Notes:** 
@@ -83,13 +67,3 @@ tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_a
   year={2021}
 }
 ```
-
-## Other Links
-
-> **Image Classification**: See [Swin Transformer for Image Classification](https://github.com/microsoft/Swin-Transformer).
-
-> **Object Detection**: See [Swin Transformer for Object Detection](https://github.com/SwinTransformer/Swin-Transformer-Object-Detection).
-
-> **Self-Supervised Learning**: See [MoBY with Swin Transformer](https://github.com/SwinTransformer/Transformer-SSL).
-
-> **Video Recognition**, See [Video Swin Transformer](https://github.com/SwinTransformer/Video-Swin-Transformer).
