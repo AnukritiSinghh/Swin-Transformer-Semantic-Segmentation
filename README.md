@@ -1,6 +1,6 @@
 # Swin Transformer for Semantic Segmentaion in Offroad datasets
 
-This repo contains the supported code and configuration files to reproduce semantic segmentaion results of [Swin Transformer](https://arxiv.org/pdf/2103.14030.pdf). on the custom dataset of offroad enviornment- RELLIS3D dataset. It is based on [mmsegmentaion](https://github.com/open-mmlab/mmsegmentation/tree/v0.11.0).
+This repo contains the supported code and configuration files to reproduce semantic segmentaion results of [Swin Transformer](https://arxiv.org/pdf/2103.14030.pdf). on the custom dataset of offroad enviornment- **RELLIS3D dataset**. It is based on [mmsegmentaion](https://github.com/open-mmlab/mmsegmentation/tree/v0.11.0).
 
 ## Results and Models
 
@@ -16,8 +16,7 @@ This repo contains the supported code and configuration files to reproduce seman
 
 - **Download the Pre-trained models from [Swin Transformer for ImageNet Classification](https://github.com/microsoft/Swin-Transformer). This will be used to fine-tune RELLIS3D dataset.**
 - Use small (S) or Tiney (T) model, which will be easy to compute.
-- Access code for `baidu` is `swin`.
-- The learning rate needs to be tuned for best practice to se what works best for RELLIS3D.
+- The learning rate needs to be tuned for best practice to se what works best for **RELLIS3D**.
 
 ## Usage
 
